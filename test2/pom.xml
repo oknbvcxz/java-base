@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <!-- 项目的版本和其他信息 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.myapp</groupId>  <!-- 你的项目的 groupId -->
+    <artifactId>myapp</artifactId>  <!-- 你的项目的 artifactId -->
+    <version>1.0.0</version>  <!-- 版本号 -->
+    <packaging>jar</packaging>  <!-- 打包类型，通常是 jar -->
+
+    <dependencies>
+        <!-- 这里可以放置你的项目的依赖 -->
+        <!-- <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>example-library</artifactId>
+            <version>1.0.0</version>
+        </dependency> -->
+    </dependencies>
+
+</project>

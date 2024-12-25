@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <!-- 项目的版本和其他信息 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>  <!-- 你的项目的 groupId -->
+    <artifactId>test3</artifactId>  <!-- 你的项目的 artifactId -->
+    <version>1.0.0</version>  <!-- 版本号 -->
+    <!-- <packaging>jar</packaging>   打包类型，默认是 jar -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.myapp</groupId>
+            <artifactId>myapp</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin><!-- 打jar包时,能在jar中指定mainClass位置,使得jar包可以直接java -jar执行 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.example.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin><!-- 指定mainClass位置,使得mvn exec:java 能找到主类 -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>com.example.App</mainClass> <!-- 替换为您的主类全限定名 -->
+                    <!-- 如果有需要，可以添加其他配置，例如 JVM 参数 -->
+                    <!--
+                    <arguments>
+                        <argument>arg1</argument>
+                        <argument>arg2</argument>
+                    </arguments>
+                    -->
+                </configuration>
+            </plugin>
+            <plugin><!-- 打shade-plugin：1.可执行 2.包含所有依赖 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase><!-- 执行于maven的package生命周期 -->
+                        <goals>
+                            <goal>shade</goal><!-- 包含所有依赖 -->
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><!-- 可执行 -->
+                                    <mainClass>com.example.App</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
